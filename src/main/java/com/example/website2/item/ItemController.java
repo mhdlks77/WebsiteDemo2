@@ -3,7 +3,6 @@ package com.example.website2.item;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @RestController
 public class ItemController {
@@ -36,8 +35,8 @@ public class ItemController {
 //    }
 
     @GetMapping("/item")
-    public List<Item> getItems(){
-        return service.getItems();
+    public Item getItem(@RequestParam("id") Long id){
+        return service.getItem(id);
     }
 
     @PostMapping("/item")

@@ -3,7 +3,6 @@ package com.example.website2.item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,8 +15,11 @@ public class ItemService {
         this.repository = repository;
     }
 
-    public List<Item> getItems(){
-        return repository.findAll();
+    public Item getItem(Long id){
+        return repository.findAll().stream()
+                .filter(item -> id.equals(item.getId()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("item " + id + " does not exist"));
     }
 
     public void addNewItem(Item item) {
